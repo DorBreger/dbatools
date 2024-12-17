@@ -1,7 +1,7 @@
 function Get-DbaMaxMemory {
     <#
     .SYNOPSIS
-        Gets the 'Max Server Memory' configuration setting and the memory of the server.  Works on SQL Server 2000-2014.
+        Gets the 'Max Server Memory' configuration setting and the memory of the server.  Works on SQL Server 2000-2022..
 
     .DESCRIPTION
         This command retrieves the SQL Server 'Max Server Memory' configuration setting as well as the total physical installed on the server.
@@ -78,8 +78,9 @@ function Get-DbaMaxMemory {
                 SqlInstance  = $server.DomainInstanceName
                 Total        = [int]$totalMemory
                 MaxValue     = [int]$server.Configuration.MaxServerMemory.ConfigValue
+                MinValue    = [int]$server.Configuration.MinServerMemory.ConfigValue
                 Server       = $server # This will allowing piping a non-connected object
-            } | Select-DefaultView -Property ComputerName, InstanceName, SqlInstance, Total, MaxValue
+            } | Select-DefaultView -Property ComputerName, InstanceName, SqlInstance, Total, MaxValue, MinValue
         }
     }
 }
